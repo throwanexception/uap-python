@@ -37,7 +37,7 @@ from ua_parser import user_agent_parser
 TEST_RESOURCES_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                   '../uap-core')
 class ParseTest(unittest.TestCase):
-    def assertEquals(self, first, second, msg=None): 
+    def assertEqual(self, first, second, msg=None): 
         """Fail if the two objects are unequal as determined by the '==' 
            operator. 
         """ 
@@ -152,6 +152,7 @@ class ParseTest(unittest.TestCase):
 
             result = {}
             result = user_agent_parser.ParseUserAgent(user_agent_string, **kwds)
+            print expected, result
             self.assertEqual(
                 result, expected,
                 "UA: {0}\n expected<{1}, {2}, {3}, {4}> != actual<{5}, {6}, {7}, {8}>".format(
