@@ -147,11 +147,11 @@ class ParseTest(unittest.TestCase):
             print user_agent_string
             print expected, result
             self.assertEqual(
-                result, expected,
-                u'UA: {0}\n expected<{1}, {2}, {3}, {4}> != actual<{5}, {6}, {7}, {8}>'.format(
-                    user_agent_string,
-                    expected['family'], expected['major'], expected['minor'], expected['patch'],
-                    result['family'], result['major'], result['minor'], result['patch']))
+                result, expected)
+#                u'UA: {0}\n expected<{1}, {2}, {3}, {4}> != actual<{5}, {6}, {7}, {8}>'.format(
+#                    user_agent_string,
+#                    expected['family'], expected['major'], expected['minor'], expected['patch'],
+#                    result['family'], result['major'], result['minor'], result['patch']))
 
     def runOSTestsFromYAML(self, file_name):
         yamlFile = open(os.path.join(TEST_RESOURCES_DIR, file_name))
