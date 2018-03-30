@@ -137,7 +137,7 @@ class ParseTest(unittest.TestCase):
                 kwds = eval(test_case['js_ua'])
 
             # The expected results
-            expected = {'family': test_case['family'],
+            expected = {'family': test_case['family'].encode('utf-8'),
                         'major': test_case['major'],
                         'minor': test_case['minor'],
                         'patch': test_case['patch']}
