@@ -36,12 +36,15 @@ from ua_parser import user_agent_parser
 
 TEST_RESOURCES_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                   '../uap-core')
-def force_bytes(text):
-    if text is None:
-        return text
-    return text.encode('utf8')
-
 class ParseTest(unittest.TestCase):
+    def assertEquals(self, first, second, msg=None): 
+        """Fail if the two objects are unequal as determined by the '==' 
+           operator. 
+        """ 
+        if not first == second: 
+            raise self.failureException, \
+                  (msg.decode('utf-8', 'ignore') or '%r != %r' % (first, second)) 
+
     def testBrowserscopeStrings(self):
         self.runUserAgentTestsFromYAML(os.path.join(
             TEST_RESOURCES_DIR, 'tests/test_ua.yaml'))
@@ -135,7 +138,6 @@ class ParseTest(unittest.TestCase):
         yamlFile.close()
 
         for test_case in yamlContents['test_cases']:
-            print(test_case['family'])
             # Inputs to Parse()
             user_agent_string = test_case['user_agent_string']
             kwds = {}
@@ -143,10 +145,10 @@ class ParseTest(unittest.TestCase):
                 kwds = eval(test_case['js_ua'])
 
             # The expected results
-            expected = {'family': force_bytes(test_case['family']),
-                        'major': force_bytes(test_case['major']),
-                        'minor': force_bytes(test_case['minor']),
-                        'patch': force_bytes(test_case['patch'])}
+            expected = {'family': test_case['family'],
+                        'major': test_case['major'],
+                        'minor': test_case['minor'],
+                        'patch': test_case['patch']}
 
             result = {}
             result = user_agent_parser.ParseUserAgent(user_agent_string, **kwds)
