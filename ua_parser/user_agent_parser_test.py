@@ -37,14 +37,6 @@ from ua_parser import user_agent_parser
 TEST_RESOURCES_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                   '../uap-core')
 class ParseTest(unittest.TestCase):
-    def assertEqual(self, first, second, msg=None): 
-        """Fail if the two objects are unequal as determined by the '==' 
-           operator. 
-        """ 
-        if not first == second: 
-            raise self.failureException, \
-                  (msg.decode('utf-8', 'ignore') or '%r != %r' % (first, second)) 
-
     def testBrowserscopeStrings(self):
         self.runUserAgentTestsFromYAML(os.path.join(
             TEST_RESOURCES_DIR, 'tests/test_ua.yaml'))
@@ -102,7 +94,7 @@ class ParseTest(unittest.TestCase):
         result = user_agent_parser.Parse(user_agent_string)
         self.assertEqual(
             result, expected,
-            "UA: {0}\n expected<{1}> != actual<{2}>".format(user_agent_string, expected, result))
+            u'UA: {0}\n expected<{1}> != actual<{2}>'.format(user_agent_string, expected, result))
     # Make a YAML file for manual comparsion with pgts_browser_list-orig.yaml
     def makePGTSComparisonYAML(self):
         import codecs
@@ -152,10 +144,11 @@ class ParseTest(unittest.TestCase):
 
             result = {}
             result = user_agent_parser.ParseUserAgent(user_agent_string, **kwds)
+            print user_agent_string
             print expected, result
             self.assertEqual(
                 result, expected,
-                "UA: {0}\n expected<{1}, {2}, {3}, {4}> != actual<{5}, {6}, {7}, {8}>".format(
+                u'UA: {0}\n expected<{1}, {2}, {3}, {4}> != actual<{5}, {6}, {7}, {8}>'.format(
                     user_agent_string,
                     expected['family'], expected['major'], expected['minor'], expected['patch'],
                     result['family'], result['major'], result['minor'], result['patch']))
@@ -184,7 +177,7 @@ class ParseTest(unittest.TestCase):
             result = user_agent_parser.ParseOS(user_agent_string, **kwds)
             self.assertEqual(
                 result, expected,
-                "UA: {0}\n expected<{1} {2} {3} {4} {5}> != actual<{6} {7} {8} {9} {10}>".format(
+                u'UA: {0}\n expected<{1} {2} {3} {4} {5}> != actual<{6} {7} {8} {9} {10}>'.format(
                     user_agent_string,
                     expected['family'],
                     expected['major'],
@@ -219,7 +212,7 @@ class ParseTest(unittest.TestCase):
             result = user_agent_parser.ParseDevice(user_agent_string, **kwds)
             self.assertEqual(
                 result, expected,
-                "UA: {0}\n expected<{1} {2} {3}> != actual<{4} {5} {6}>".format(
+               u'UA: {0}\n expected<{1} {2} {3}> != actual<{4} {5} {6}>'.format(
                     user_agent_string,
                     expected['family'],
                     expected['brand'],
