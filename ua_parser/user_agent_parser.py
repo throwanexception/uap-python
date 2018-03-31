@@ -30,6 +30,7 @@ def MultiReplace(string, match):
             return group[index]
         return ''
 
+    string = unicode(string)
     _string = re.sub(r'\$(\d)', _repl, string)
     _string = re.sub(r'^\s+|\s+$', '', _string)
     if _string == '':
